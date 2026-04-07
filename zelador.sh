@@ -3,7 +3,7 @@
 # Aqui começa pela configuração dos logs
 DIR_LOGS="/var/log/app"
 
-echo "--- Iniciando o Zelador de Logs ---"
+echo "Iniciando o Zelador de Logs"
 
 # Nessa parte eu verifico se existe
 if [ ! -d "$DIR_LOGS" ]; then
