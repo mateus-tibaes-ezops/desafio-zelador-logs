@@ -13,5 +13,5 @@ Automatizar a limpeza e o monitoramento da pasta '/var/log/app', garantindo que 
 
 ## Como rodar 
 1. De permissao de execução: 
-   '''bash
+   ```bash
    chmod +x zelador.sh
