@@ -1,12 +1,22 @@
 #!/bin/bash
 
-# aqui vou definir o local dos logs
-DIR_LOGS="/var/log/app/"
+# Aqui começa pela configuração dos logs
+DIR_LOGS="/var/log/app"
 
-# Aqui a verificacao se o diretorio exite 
+echo "--- Iniciando o Zelador de Logs ---"
+
+# Nessa parte eu verifico se existe
 if [ ! -d "$DIR_LOGS" ]; then
-    echo "Erro: O diretorio $DIR_LOGS nao foi encontrado!"
-    exit 1
+    echo "Diretorio nao encontrado. Criando $DIR_LOGS..."
+    mkdir -p "$DIR_LOGS"
 fi
 
-echo "Diretorio encontrado. Iniciando a limpeza..."
+# Aqui começa a compactar os logs com mais de 7 dias 
+echo "Compactando logs antigos (7 dias)..."
+find "$DIR_LOGS" -name "*.log" -mtime +7 -exec tar -rvf "$DIR_LOGS/archive.tar" {} \;
+
+# Aqui começa a apagar logs com mais de 30 dias 
+echo "Apagando logs com mais de 30 dias..."
+find "$DIR_LOGS" -name "*.log" -mtime +30 -delete
+
+echo "Faxina concluída com sucesso!"
